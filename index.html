@@ -28,37 +28,41 @@
             color: var(--text-main);
             line-height: 1.6;
             padding-bottom: 50px;
+            overflow-x: hidden; /* Evita scroll horizontal */
         }
 
         /* --- HEADER FUTURISTA --- */
         header {
             text-align: center;
-            padding: 80px 20px;
-            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 60%);
+            padding: 60px 20px;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 70%);
         }
 
         h1 {
-            font-size: 4rem;
+            /* Tamaño de fuente dinámico: mínimo 2.5rem, ideal 5vw, máximo 4.5rem */
+            font-size: clamp(2.5rem, 5vw, 4.5rem); 
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            letter-spacing: -2px;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            line-height: 1.1;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto 30px;
+            padding: 0 10px;
         }
 
         .badges {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 10px;
+            flex-wrap: wrap; /* Permite que bajen si no caben */
         }
 
         .badge {
@@ -66,10 +70,11 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 8px 16px;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap; /* Evita que el texto del badge se rompa */
         }
 
         /* --- GRID PRINCIPAL --- */
@@ -78,6 +83,7 @@
             margin: 0 auto;
             padding: 20px;
             display: grid;
+            /* Por defecto: 12 columnas */
             grid-template-columns: repeat(12, 1fr);
             gap: 20px;
         }
@@ -88,9 +94,11 @@
             border-radius: 20px;
             padding: 30px;
             position: relative;
-            overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
         .card:hover {
@@ -100,42 +108,47 @@
         }
 
         .card-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #fff;
         }
 
-        .card-title i { color: var(--primary); }
+        .card-title i { color: var(--primary); min-width: 24px; }
 
-        /* --- SECCIONES ESPECÍFICAS --- */
+        /* --- CONFIGURACIÓN DE COLUMNAS (Responsive) --- */
         
-        /* 1. Problema y Solución (Ancho completo) */
+        /* Desktop (> 1024px) */
         .col-span-12 { grid-column: span 12; }
-        .col-span-6 { grid-column: span 6; }
-        .col-span-4 { grid-column: span 4; }
+        .col-span-8  { grid-column: span 8; }
+        .col-span-6  { grid-column: span 6; }
+        .col-span-4  { grid-column: span 4; }
 
         .solution-box {
             background: linear-gradient(90deg, rgba(56,189,248,0.1), rgba(168,85,247,0.1));
             border-left: 4px solid var(--primary);
             padding: 20px;
-            margin-top: 20px;
+            margin-top: auto; /* Empuja hacia abajo si hay espacio */
             border-radius: 0 10px 10px 0;
+            font-size: 0.95rem;
         }
 
         /* 2. Comparación de Datos */
         .comparison {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             margin-top: 20px;
             text-align: center;
+            flex-wrap: wrap; /* Clave para evitar solapamiento */
+            gap: 20px;
         }
         
         .vs-circle {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: var(--text-main);
             color: var(--bg-dark);
             border-radius: 50%;
@@ -143,71 +156,89 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+            flex-shrink: 0; /* Evita que se aplaste */
         }
 
         /* 3. Métricas Grandes */
         .stat-card {
             text-align: center;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
-            min-height: 200px;
+            min-height: 220px;
         }
 
         .stat-value {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
             font-weight: 700;
             background: linear-gradient(to right, var(--success), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.2;
         }
 
-        .stat-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        .stat-label { 
+            color: var(--text-muted); 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-size: 0.85rem; 
+            margin-top: 5px;
+        }
 
         /* 4. Semáforo */
         .traffic-light {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
+            width: 100%;
         }
         .light {
             display: flex;
             align-items: center;
             gap: 15px;
-            padding: 10px;
+            padding: 12px;
             background: rgba(0,0,0,0.2);
             border-radius: 10px;
         }
-        .dot { width: 15px; height: 15px; border-radius: 50%; box-shadow: 0 0 10px currentColor; }
+        .dot { 
+            width: 16px; height: 16px; 
+            border-radius: 50%; 
+            box-shadow: 0 0 8px currentColor; 
+            flex-shrink: 0;
+        }
         .green { color: var(--success); background-color: var(--success); }
         .orange { color: var(--warning); background-color: var(--warning); }
         .red { color: var(--danger); background-color: var(--danger); }
+        
+        .light-text { font-size: 0.9rem; line-height: 1.3; }
 
         /* 5. Pipeline (Active Learning) */
         .pipeline {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             position: relative;
             margin-top: 30px;
+            gap: 10px;
         }
+        /* Línea conectora */
         .pipeline::before {
             content: '';
             position: absolute;
             top: 25px;
-            left: 10%;
-            right: 10%;
+            left: 5%;
+            right: 5%;
             height: 2px;
             background: var(--text-muted);
-            opacity: 0.3;
+            opacity: 0.2;
             z-index: 0;
         }
         .step {
             position: relative;
             z-index: 1;
-            background: var(--card-bg);
-            padding: 0 10px;
+            background: var(--card-bg); /* Tapa la línea */
+            padding: 0 5px;
             text-align: center;
+            flex: 1; /* Distribuye espacio equitativo */
         }
         .step-icon {
             width: 50px;
@@ -221,30 +252,75 @@
             margin: 0 auto 10px;
             color: var(--primary);
             font-size: 1.2rem;
+            transition: transform 0.3s;
         }
+        .step:hover .step-icon { transform: scale(1.1); background: var(--bg-dark); }
+        
+        .step strong { display: block; font-size: 0.95rem; margin-bottom: 3px; }
+        .step p { font-size: 0.75rem; color: var(--text-muted); }
 
         /* Footer */
         footer {
             text-align: center;
             margin-top: 50px;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* RESPONSIVE */
+        /* --- MEDIA QUERIES (Aquí arreglamos el solapamiento) --- */
+
+        /* TABLET (1024px e inferior) */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr); /* Cambia a 2 columnas */
+            }
+            /* Re-mapeo de spans para tablet */
+            .col-span-12, .col-span-8, .col-span-6, .col-span-4 {
+                grid-column: span 2; /* Todo ocupa el ancho completo o mitad */
+            }
+            
+            /* Ajuste específico para mantener métrica y semáforo lado a lado si se quiere */
+            .col-span-6-tablet { grid-column: span 1; } 
+        }
+
+        /* MOBILE (768px e inferior) */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .col-span-6, .col-span-4 { grid-column: span 12; }
-            .pipeline { flex-direction: column; gap: 20px; }
-            .pipeline::before { display: none; }
-            .comparison { flex-direction: column; gap: 20px; }
+            .container {
+                grid-template-columns: 1fr; /* 1 sola columna */
+                padding: 15px;
+            }
+            .col-span-12, .col-span-8, .col-span-6, .col-span-4 {
+                grid-column: span 1; /* Todo ancho completo */
+            }
+
+            .pipeline {
+                flex-direction: column; /* Pipeline vertical */
+                gap: 25px;
+                align-items: flex-start;
+                padding-left: 20px;
+            }
+            .pipeline::before {
+                /* Línea vertical en móvil */
+                top: 0; bottom: 0; left: 44px; right: auto;
+                width: 2px; height: 100%;
+            }
+            .step {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                text-align: left;
+                padding: 0;
+            }
+            .step-icon { margin: 0; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <i class="fas fa-dna" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+        <i class="fas fa-dna" style="font-size: clamp(3rem, 5vw, 4rem); color: var(--primary); margin-bottom: 20px;"></i>
         <h1>DermaAI</h1>
         <p class="subtitle">Sistema Inteligente de Apoyo al Diagnóstico de Cáncer de Piel usando Vision Transformers.</p>
         
@@ -260,7 +336,7 @@
         
         <div class="card col-span-12">
             <h2 class="card-title"><i class="fas fa-bullseye"></i> El Desafío Médico</h2>
-            <p style="color: var(--text-muted);">El melanoma detectado temprano tiene una tasa de supervivencia del 95%. Sin embargo, la falta de acceso a especialistas y herramientas crea una barrera crítica. La mayoría de las IAs fallan porque solo conocen fotos de microscopio, no de celulares.</p>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">El melanoma detectado temprano tiene una tasa de supervivencia del 95%. Sin embargo, la falta de acceso a especialistas y herramientas crea una barrera crítica. La mayoría de las IAs fallan porque solo conocen fotos de microscopio, no de celulares.</p>
             <div class="solution-box">
                 <strong>💡 La Solución DermaAI:</strong> Un modelo híbrido entrenado para entender tanto la dermatoscopia clínica como la fotografía móvil imperfecta, democratizando el triaje.
             </div>
@@ -268,7 +344,7 @@
 
         <div class="card col-span-6">
             <h2 class="card-title"><i class="fas fa-database"></i> Fusión de Datos</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Para lograr robustez, unificamos dos mundos:</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Para lograr robustez, unificamos dos mundos:</p>
             
             <div class="comparison">
                 <div>
@@ -288,7 +364,7 @@
         <div class="card stat-card col-span-6">
             <div class="stat-value">> 85%</div>
             <div class="stat-label">Sensibilidad (Recall) Melanoma</div>
-            <p style="margin-top: 10px; font-size: 0.9rem;">Prioridad: No dejar escapar casos graves.</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-main);">Prioridad: No dejar escapar casos graves.</p>
         </div>
 
         <div class="card col-span-4">
@@ -296,21 +372,21 @@
             <div class="traffic-light">
                 <div class="light">
                     <div class="dot green"></div>
-                    <div>
+                    <div class="light-text">
                         <strong>Benigno</strong><br>
                         <small style="color: var(--text-muted);">Observación rutinaria</small>
                     </div>
                 </div>
                 <div class="light">
                     <div class="dot orange"></div>
-                    <div>
+                    <div class="light-text">
                         <strong>Precaución</strong><br>
                         <small style="color: var(--text-muted);">Seguimiento médico</small>
                     </div>
                 </div>
                 <div class="light">
                     <div class="dot red"></div>
-                    <div>
+                    <div class="light-text">
                         <strong>Peligro</strong><br>
                         <small style="color: var(--text-muted);">Atención Urgente</small>
                     </div>
@@ -320,28 +396,36 @@
 
         <div class="card col-span-8">
             <h2 class="card-title"><i class="fas fa-sync-alt"></i> Aprendizaje Continuo</h2>
-            <p style="color: var(--text-muted);">El sistema mejora con el uso real.</p>
+            <p style="color: var(--text-muted);">El sistema mejora con el uso real, recolectando datos automáticamente.</p>
             
             <div class="pipeline">
                 <div class="step">
                     <div class="step-icon"><i class="fas fa-camera"></i></div>
-                    <strong>Captura</strong>
-                    <p style="font-size: 0.8rem;">Celular</p>
+                    <div>
+                        <strong>Captura</strong>
+                        <p>Celular</p>
+                    </div>
                 </div>
                 <div class="step">
                     <div class="step-icon"><i class="fas fa-server"></i></div>
-                    <strong>API + ViT</strong>
-                    <p style="font-size: 0.8rem;">Diagnóstico</p>
+                    <div>
+                        <strong>API + ViT</strong>
+                        <p>Diagnóstico</p>
+                    </div>
                 </div>
                 <div class="step">
                     <div class="step-icon"><i class="fas fa-save"></i></div>
-                    <strong>Dataset</strong>
-                    <p style="font-size: 0.8rem;">Nuevos Casos</p>
+                    <div>
+                        <strong>Dataset</strong>
+                        <p>Nuevos Casos</p>
+                    </div>
                 </div>
                 <div class="step">
                     <div class="step-icon"><i class="fas fa-brain"></i></div>
-                    <strong>Re-Train</strong>
-                    <p style="font-size: 0.8rem;">Mejora v2.0</p>
+                    <div>
+                        <strong>Re-Train</strong>
+                        <p>Mejora v2.0</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -350,7 +434,7 @@
 
     <footer>
         <p>Desarrollado con ❤️ usando Inteligencia Artificial.</p>
-        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.5;">Aviso: Esta herramienta es experimental y no sustituye el diagnóstico médico.</p>
+        <p style="margin-top: 5px; opacity: 0.5;">Aviso: Esta herramienta es experimental y no sustituye el diagnóstico médico.</p>
     </footer>
 
 </body>
