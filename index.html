@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermaAI - Infografía del Proyecto</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #38bdf8;   /* Cian */
+            --secondary: #a855f7; /* Violeta */
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* --- HEADER FUTURISTA --- */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 60%);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- GRID PRINCIPAL --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        /* --- TARJETAS (CARDS) --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i { color: var(--primary); }
+
+        /* --- SECCIONES ESPECÍFICAS --- */
+        
+        /* 1. Problema y Solución (Ancho completo) */
+        .col-span-12 { grid-column: span 12; }
+        .col-span-6 { grid-column: span 6; }
+        .col-span-4 { grid-column: span 4; }
+
+        .solution-box {
+            background: linear-gradient(90deg, rgba(56,189,248,0.1), rgba(168,85,247,0.1));
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* 2. Comparación de Datos */
+        .comparison {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .vs-circle {
+            width: 50px;
+            height: 50px;
+            background: var(--text-main);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        /* 3. Métricas Grandes */
+        .stat-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .stat-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--success), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+
+        /* 4. Semáforo */
+        .traffic-light {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .light {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        .dot { width: 15px; height: 15px; border-radius: 50%; box-shadow: 0 0 10px currentColor; }
+        .green { color: var(--success); background-color: var(--success); }
+        .orange { color: var(--warning); background-color: var(--warning); }
+        .red { color: var(--danger); background-color: var(--danger); }
+
+        /* 5. Pipeline (Active Learning) */
+        .pipeline {
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+            margin-top: 30px;
+        }
+        .pipeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: var(--text-muted);
+            opacity: 0.3;
+            z-index: 0;
+        }
+        .step {
+            position: relative;
+            z-index: 1;
+            background: var(--card-bg);
+            padding: 0 10px;
+            text-align: center;
+        }
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .col-span-6, .col-span-4 { grid-column: span 12; }
+            .pipeline { flex-direction: column; gap: 20px; }
+            .pipeline::before { display: none; }
+            .comparison { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <i class="fas fa-dna" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+        <h1>DermaAI</h1>
+        <p class="subtitle">Sistema Inteligente de Apoyo al Diagnóstico de Cáncer de Piel usando Vision Transformers.</p>
+        
+        <div class="badges">
+            <div class="badge"><i class="fab fa-python"></i> Python 3.9</div>
+            <div class="badge"><i class="fas fa-brain"></i> PyTorch</div>
+            <div class="badge"><i class="fas fa-bolt"></i> FastAPI</div>
+            <div class="badge"><i class="fas fa-mobile"></i> Streamlit</div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="card col-span-12">
+            <h2 class="card-title"><i class="fas fa-bullseye"></i> El Desafío Médico</h2>
+            <p style="color: var(--text-muted);">El melanoma detectado temprano tiene una tasa de supervivencia del 95%. Sin embargo, la falta de acceso a especialistas y herramientas crea una barrera crítica. La mayoría de las IAs fallan porque solo conocen fotos de microscopio, no de celulares.</p>
+            <div class="solution-box">
+                <strong>💡 La Solución DermaAI:</strong> Un modelo híbrido entrenado para entender tanto la dermatoscopia clínica como la fotografía móvil imperfecta, democratizando el triaje.
+            </div>
+        </div>
+
+        <div class="card col-span-6">
+            <h2 class="card-title"><i class="fas fa-database"></i> Fusión de Datos</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Para lograr robustez, unificamos dos mundos:</p>
+            
+            <div class="comparison">
+                <div>
+                    <i class="fas fa-microscope" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                    <h3>HAM10000</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Imágenes de Laboratorio</p>
+                </div>
+                <div class="vs-circle">VS</div>
+                <div>
+                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color: var(--secondary); margin-bottom: 10px;"></i>
+                    <h3>PAD-UFES</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Fotos de Celular</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card stat-card col-span-6">
+            <div class="stat-value">> 85%</div>
+            <div class="stat-label">Sensibilidad (Recall) Melanoma</div>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Prioridad: No dejar escapar casos graves.</p>
+        </div>
+
+        <div class="card col-span-4">
+            <h2 class="card-title"><i class="fas fa-traffic-light"></i> UX Clínica</h2>
+            <div class="traffic-light">
+                <div class="light">
+                    <div class="dot green"></div>
+                    <div>
+                        <strong>Benigno</strong><br>
+                        <small style="color: var(--text-muted);">Observación rutinaria</small>
+                    </div>
+                </div>
+                <div class="light">
+                    <div class="dot orange"></div>
+                    <div>
+                        <strong>Precaución</strong><br>
+                        <small style="color: var(--text-muted);">Seguimiento médico</small>
+                    </div>
+                </div>
+                <div class="light">
+                    <div class="dot red"></div>
+                    <div>
+                        <strong>Peligro</strong><br>
+                        <small style="color: var(--text-muted);">Atención Urgente</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card col-span-8">
+            <h2 class="card-title"><i class="fas fa-sync-alt"></i> Aprendizaje Continuo</h2>
+            <p style="color: var(--text-muted);">El sistema mejora con el uso real.</p>
+            
+            <div class="pipeline">
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-camera"></i></div>
+                    <strong>Captura</strong>
+                    <p style="font-size: 0.8rem;">Celular</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-server"></i></div>
+                    <strong>API + ViT</strong>
+                    <p style="font-size: 0.8rem;">Diagnóstico</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-save"></i></div>
+                    <strong>Dataset</strong>
+                    <p style="font-size: 0.8rem;">Nuevos Casos</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-brain"></i></div>
+                    <strong>Re-Train</strong>
+                    <p style="font-size: 0.8rem;">Mejora v2.0</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Desarrollado con ❤️ usando Inteligencia Artificial.</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.5;">Aviso: Esta herramienta es experimental y no sustituye el diagnóstico médico.</p>
+    </footer>
+
+</body>
+</html>
